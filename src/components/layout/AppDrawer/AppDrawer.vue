@@ -46,7 +46,9 @@ watch(
 
 <template>
   <aside :class="['app-drawer', { 'app-drawer--hidden': !modelValue }]">
-    <div class="app-drawer__content"></div>
+    <div class="app-drawer__content">
+      <slot></slot>
+    </div>
   </aside>
 </template>
 
