@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { PageHeading } from "@/components/ui";
+</script>
 
 <template>
-  <div>Products</div>
+  <PageHeading>Products</PageHeading>
 </template>
 
 <style lang="scss" scoped></style>
