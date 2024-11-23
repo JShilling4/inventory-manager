@@ -22,6 +22,7 @@ provide(layoutKey, $layout);
 html,
 body {
   height: 100%;
+  font-family: "Roboto", sans-serif;
 }
 #app {
   height: 100%;
