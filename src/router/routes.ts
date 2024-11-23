@@ -21,6 +21,6 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: ROUTE_PATHS.Orders,
     name: ROUTE_NAMES.Orders,
-    component: () => import("@/views/Categories.vue"),
+    component: () => import("@/views/Orders.vue"),
   },
 ];
