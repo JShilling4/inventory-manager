@@ -1,20 +1,26 @@
-import Home from "@/views/HomeView.vue";
+import { ROUTE_NAMES, ROUTE_PATHS } from "@/constants";
+import Dashboard from "@/views/Dashboard.vue";
 import { RouteRecordRaw } from "vue-router";
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "Wizard",
-    component: Home,
+    path: ROUTE_PATHS.Home,
+    name: ROUTE_NAMES.Home,
+    component: Dashboard,
   },
   {
-    path: "/page2",
-    name: "PageTwo",
-    component: () => import("@/views/PageTwo.vue"),
+    path: ROUTE_PATHS.Products,
+    name: ROUTE_NAMES.Products,
+    component: () => import("@/views/Products.vue"),
   },
   {
-    path: "/page3",
-    name: "PageThree",
-    component: () => import("@/views/PageThree.vue"),
+    path: ROUTE_PATHS.Categories,
+    name: ROUTE_NAMES.Categories,
+    component: () => import("@/views/Categories.vue"),
+  },
+  {
+    path: ROUTE_PATHS.Orders,
+    name: ROUTE_NAMES.Orders,
+    component: () => import("@/views/Categories.vue"),
   },
 ];

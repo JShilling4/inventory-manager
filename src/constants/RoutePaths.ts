@@ -1,9 +1,12 @@
-export const ROUTE_PATHS = {
+import { RouteNameKey } from "@/constants";
+
+export const ROUTE_PATHS: Record<RouteNameKey, string> = {
   Home: "/",
-  PageTwo: "/page2",
-  PageThree: "/page3",
+  Products: "/products",
+  Categories: "/categories",
+  Orders: "/orders",
 } as const;
 
-type RoutePathKey = keyof typeof ROUTE_PATHS;
+export type RoutePathKey = keyof typeof ROUTE_PATHS;
 
 export type RoutePath = (typeof ROUTE_PATHS)[RoutePathKey];

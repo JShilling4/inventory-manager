@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>Page Two View</div>
+  <div>Dashboard</div>
 </template>
 
 <style lang="scss" scoped></style>
