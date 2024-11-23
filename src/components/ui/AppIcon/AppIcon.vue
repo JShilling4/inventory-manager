@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { type IconName } from "@/constants";
 
-defineProps<{
+const { name, color = "#000" } = defineProps<{
   name: IconName;
+  color?: string;
 }>();
 </script>
 
 <template>
-  <FontAwesomeIcon :icon="name" class="icon" />
+  <FontAwesomeIcon :icon="name" class="icon" :color size="lg" />
 </template>
 
 <style lang="scss" scoped>
