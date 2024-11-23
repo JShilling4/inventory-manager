@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import { AppDrawer, AppHeader } from "@/components/layout";
+import { AppDrawer, SideNav, AppHeader } from "@/components/layout";
 import { layoutKey } from "@/utils/symbols";
 import { type ILayout } from "@/composables";
 
@@ -10,7 +10,9 @@ const $layout = inject<ILayout>(layoutKey) as ILayout;
 <template>
   <div class="app-layout">
     <AppHeader class="bg-primary text-white" />
-    <AppDrawer v-model="$layout.leftDrawer.isVisible" class="bg-secondary" />
+    <AppDrawer v-model="$layout.leftDrawer.isVisible" class="bg-black">
+      <SideNav />
+    </AppDrawer>
     <slot></slot>
   </div>
 </template>
