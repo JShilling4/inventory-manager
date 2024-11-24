@@ -3,7 +3,7 @@ import { PageHeading } from "@/components/layout";
 </script>
 
 <template>
-  <PageHeading>Products</PageHeading>
+  <PageHeading>Customers</PageHeading>
 </template>
 
 <style lang="scss" scoped></style>

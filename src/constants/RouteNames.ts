@@ -1,8 +1,9 @@
 export const ROUTE_NAMES = {
-  Home: "/",
-  Products: "/products",
-  Categories: "/categories",
-  Orders: "/orders",
+  Home: "Home",
+  Products: "Products",
+  Categories: "Categories",
+  Orders: "Orders",
+  Customers: "Customers",
 } as const;
 
 export type RouteNameKey = keyof typeof ROUTE_NAMES;

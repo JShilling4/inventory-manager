@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PageHeading } from "@/components/ui";
+import { PageHeading } from "@/components/layout";
 </script>
 
 <template>

@@ -1,6 +1,6 @@
-import { ROUTE_NAMES, ROUTE_PATHS } from "@/constants";
 import Dashboard from "@/views/Dashboard.vue";
 import { RouteRecordRaw } from "vue-router";
+import { ROUTE_NAMES, ROUTE_PATHS } from "@/constants";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -22,5 +22,15 @@ export const routes: Array<RouteRecordRaw> = [
     path: ROUTE_PATHS.Orders,
     name: ROUTE_NAMES.Orders,
     component: () => import("@/views/Orders.vue"),
+  },
+  {
+    path: ROUTE_PATHS.Customers,
+    name: ROUTE_NAMES.Customers,
+    component: () => import("@/views/Customers.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/views/NotFound.vue"),
   },
 ];

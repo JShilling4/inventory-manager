@@ -5,6 +5,7 @@ export const ROUTE_PATHS: Record<RouteNameKey, string> = {
   Products: "/products",
   Categories: "/categories",
   Orders: "/orders",
+  Customers: "/customers",
 } as const;
 
 export type RoutePathKey = keyof typeof ROUTE_PATHS;
