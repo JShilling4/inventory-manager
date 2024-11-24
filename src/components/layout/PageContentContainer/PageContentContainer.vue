@@ -1,14 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="page-heading">
+  <div class="page-content-container">
     <slot></slot>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.page-heading {
-  font-weight: 500;
-  font-size: 28px;
+.page-content-container {
+  padding: 1rem;
 }
 </style>

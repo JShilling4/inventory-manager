@@ -17,6 +17,9 @@ import { ICON_NAMES, ROUTE_PATHS } from "@/constants";
     <SideNavItem :icon="ICON_NAMES.List" :path="ROUTE_PATHS.Categories">
       Categories
     </SideNavItem>
+    <SideNavItem :icon="ICON_NAMES.Customer" :path="ROUTE_PATHS.Customers">
+      Customers
+    </SideNavItem>
   </nav>
 </template>
 

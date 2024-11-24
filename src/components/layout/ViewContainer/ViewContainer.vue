@@ -3,7 +3,7 @@ import { inject } from "vue";
 import { ILayout } from "@/composables";
 import { layoutKey } from "@/utils/symbols";
 
-const { vPad = "2rem", hPad = "2rem" } = defineProps<{
+const { vPad = "1.5rem", hPad = "1.5rem" } = defineProps<{
   vPad?: string;
   hPad?: string;
 }>();

@@ -33,7 +33,7 @@ function toggleLeftDrawer() {
         class="left-drawer-toggle"
         @click="toggleLeftDrawer"
       />
-      <div class="ml-sm text-white">App Name</div>
+      <div class="app-title ml-sm text-white">Inventory Manager</div>
     </div>
   </header>
 </template>
@@ -45,5 +45,9 @@ function toggleLeftDrawer() {
   width: 100%;
   height: v-bind(height);
   z-index: 2000;
+}
+.app-title {
+  font-weight: 400;
+  font-size: 24px;
 }
 </style>

@@ -10,9 +10,9 @@ const { icon = "", path } = defineProps<{
 </script>
 
 <template>
-  <RouterLink :to="path" class="nav-item px-xs">
+  <RouterLink :to="path" class="nav-item px-xs py-xs">
     <AppIcon :name="icon" class="nav-icon fa-fw" />
-    <div class="nav-item-label ml-xs py-sm">
+    <div class="nav-item-label ml-xs">
       <slot></slot>
     </div>
   </RouterLink>
@@ -27,11 +27,8 @@ const { icon = "", path } = defineProps<{
   border-radius: 10px;
 
   &:hover {
-    background-color: #fff;
-    color: #000;
-    .nav-icon {
-      color: #000;
-    }
+    background-color: rgba(255, 255, 255, 0.2);
+
     .nav-item-label {
       font-weight: 400;
     }
@@ -40,7 +37,6 @@ const { icon = "", path } = defineProps<{
 .nav-icon {
   color: #fff;
 }
-
 .nav-item-label {
   font-weight: 300;
 }
