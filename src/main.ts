@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import pinia from "./plugins/pinia";
 import { Notify, Quasar } from "quasar";
 import App from "./App.vue";
 import router from "@/router";
@@ -12,6 +13,7 @@ initFaLibrary();
 const app = createApp(App);
 
 app.use(router);
+app.use(pinia);
 app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.use(Quasar, {
   plugins: { Notify },
