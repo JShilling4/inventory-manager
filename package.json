@@ -7,7 +7,9 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-pattern .eslintignore",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest",
+    "gentypes": "npx supabase gen types typescript --linked > ./src/types/supabase.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
@@ -16,6 +18,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@quasar/extras": "^1.16.13",
+    "@supabase/supabase-js": "^2.46.1",
     "@vueuse/core": "^11.3.0",
     "axios": "^1.7.7",
     "pinia": "^2.2.6",
