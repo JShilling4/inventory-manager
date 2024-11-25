@@ -4,7 +4,7 @@ export interface ILayout {
   };
   leftDrawer: {
     isVisible: boolean;
-    width: string;
+    width: number;
     isFixed: boolean;
   };
 }

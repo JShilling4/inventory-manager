@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { computed, inject } from "vue";
 import { ILayout } from "@/composables";
 import { layoutKey } from "@/utils/symbols";
 
@@ -9,6 +9,8 @@ const { vPad = "1.5rem", hPad = "1.5rem" } = defineProps<{
 }>();
 
 const $layout = inject<ILayout>(layoutKey) as ILayout;
+
+const windowWidth = computed(() => window.innerWidth);
 </script>
 
 <template>
@@ -21,7 +23,8 @@ const $layout = inject<ILayout>(layoutKey) as ILayout;
 .view-container {
   position: absolute;
   top: v-bind("$layout.header.height");
-  left: v-bind("$layout.leftDrawer.width");
+  left: v-bind("`${$layout.leftDrawer.width}rem`");
+  width: calc(v-bind("`${windowWidth}px - ${$layout.leftDrawer.width}rem`"));
   padding-top: v-bind(vPad);
   padding-bottom: v-bind(vPad);
   padding-left: v-bind(hPad);

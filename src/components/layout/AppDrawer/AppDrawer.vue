@@ -6,12 +6,12 @@ import { layoutKey } from "@/utils/symbols";
 const {
   modelValue,
   side = "left",
-  width = "15rem",
+  width = 15,
   fixed = false,
 } = defineProps<{
   modelValue: boolean;
   side?: "left" | "right";
-  width?: string;
+  width?: number;
   fixed?: boolean;
 }>();
 
@@ -29,7 +29,7 @@ watch(
   () => modelValue,
   (show) => {
     if (show) $layout.leftDrawer.width = width;
-    else $layout.leftDrawer.width = "0";
+    else $layout.leftDrawer.width = 0;
   },
   { immediate: true }
 );
@@ -59,7 +59,7 @@ watch(
   left: v-bind("side === 'left' ? 0 : 'initial'");
   right: v-bind("side === 'right' ? 0 : 'initial'");
   height: calc(100vh - 5rem);
-  width: v-bind(width);
+  width: v-bind("`${width}rem`");
   overflow: hidden;
   transition: width 0.3s ease-in-out;
 

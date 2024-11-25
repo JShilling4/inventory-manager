@@ -45,6 +45,8 @@ function toggleLeftDrawer() {
   width: 100%;
   height: v-bind(height);
   z-index: 2000;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
 }
 .app-title {
   font-weight: 400;

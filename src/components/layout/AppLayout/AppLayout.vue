@@ -9,7 +9,7 @@ const $layout = inject<ILayout>(layoutKey) as ILayout;
 
 <template>
   <div class="app-layout">
-    <AppHeader class="bg-primary text-white" />
+    <AppHeader />
     <AppDrawer v-model="$layout.leftDrawer.isVisible" class="bg-black">
       <SideNav />
     </AppDrawer>
