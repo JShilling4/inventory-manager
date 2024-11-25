@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { Customer } from "@/types";
+import { computed } from "vue";
+import { useCustomerStore } from "@/stores";
+import { type Customer } from "@/types";
 
-const { action } = defineProps<{
-  action: "Add" | "Edit";
-}>();
+// const {} = defineProps<{}>();
 
-const customer = defineModel<Customer>("customer");
+const customerStore = useCustomerStore();
+
+const customer = defineModel<Customer>("customer", { required: true });
 const showModal = defineModel<boolean>("showModal");
+
+const modalAction = computed(() => {
+  return customer.value.id ? "Edit" : "Add";
+});
 
 async function onSaveCustomer() {
   if (!customer.value) return;
-  if (action === "Add") {
-    // await songStore.createSong(song.value);
+  if (customer.value.id) {
+    await customerStore.updateCustomer(customer.value);
   } else {
-    // await songStore.updateSong(song.value as Tables<"song">);
+    await customerStore.createCustomer(customer.value);
   }
 }
 </script>
@@ -22,89 +28,46 @@ async function onSaveCustomer() {
   <QDialog v-model="showModal" persistent>
     <QCard class="modal-content">
       <QCardSection class="modal-heading row items-center bg-black text-white">
-        <h6>{{ action }} Song</h6>
+        <h6>{{ modalAction }} Customer</h6>
       </QCardSection>
       <QCardSection v-if="customer" class="modal-body">
-        <QInput
-          v-if="'id' in customer"
-          v-model="customer.id"
-          label="ID"
-          readonly
-        />
-        <!-- <QInput v-model="song.artist" label="Artist" />
-        <QInput v-model="song.title" label="Title" />
-        <QSelect
+        <div class="row">
+          <QInput
+            v-model="customer.first_name"
+            label="First Name"
+            class="col"
+          />
+          <QInput
+            v-model="customer.last_name"
+            label="Last Name"
+            class="col ml-xs"
+          />
+        </div>
+        <div class="row">
+          <QInput v-model="customer.phone" label="Phone" class="col" />
+          <QInput v-model="customer.email" label="Email" class="col ml-xs" />
+        </div>
+        <div class="row">
+          <QInput v-model="customer.address" label="Address" class="col" />
+          <QInput v-model="customer.city" label="City" class="col ml-xs" />
+        </div>
+        <div class="row">
+          <QInput v-model="customer.state" label="State" class="col" />
+          <QInput
+            v-model="customer.zipcode"
+            label="Zipcode"
+            class="col ml-xs"
+          />
+        </div>
+        <QInput v-model="customer.company" label="Company" />
+
+        <!-- <QSelect
           v-model="song.status"
           :options="SONG_STATUSES"
           label="Status"
           behavior="menu"
-        />
-        <QSelect
-          v-model="song.vocal_lead"
-          :options="memberStore.members"
-          option-value="id"
-          :option-label="
-            (option: Tables<'member'>) =>
-              `${option.first_name} ${option.last_name}`
-          "
-          label="Vocal Lead"
-          emit-value
-          map-options
-          clearable
-          behavior="menu"
-          @update:model-value="
-            (val: string | null) => {
-              if (!val) val = null;
-            }
-          "
-        />
-        <QSelect
-          v-model="song.vocal_second"
-          :options="
-            memberStore.members.filter((m) => m.id !== song?.vocal_lead)
-          "
-          option-value="id"
-          :option-label="
-            (option: Tables<'member'>) =>
-              `${option.first_name} ${option.last_name}`
-          "
-          label="Vocal Second"
-          emit-value
-          map-options
-          clearable
-          behavior="menu"
-          @update:model-value="
-            (val: string | null) => {
-              if (!val) val = null;
-            }
-          "
-        />
-        <QSelect
-          v-model="song.vocal_third"
-          :options="
-            memberStore.members.filter(
-              (m) => m.id !== song?.vocal_lead && m.id !== song?.vocal_second
-            )
-          "
-          option-value="id"
-          :option-label="
-            (option: Tables<'member'>) =>
-              `${option.first_name} ${option.last_name}`
-          "
-          label="Vocal Third"
-          emit-value
-          map-options
-          clearable
-          behavior="menu"
-          @update:model-value="
-            (val: string | null) => {
-              if (!val) val = null;
-            }
-          "
-        />
-        <QInput v-model="song.link_url" label="YouTube Link" />
-        <QInput v-model="song.download_url" label="Download Link" />
-        <div class="row q-mt-md items-center">
+        /> -->
+        <!-- <div class="row q-mt-md items-center">
           <span class="radio-label q-field__label q-mr-sm">Highlighted?</span>
           <QOptionGroup
             v-model="song.is_highlighted"
@@ -115,15 +78,7 @@ async function onSaveCustomer() {
             color="primary"
             inline
           />
-        </div>
-        <QSelect
-          v-model="song.specials"
-          :options="SONG_SPECIALS"
-          label="Specials"
-          multiple
-          behavior="menu"
-        />
-        <QInput v-model="song.length" label="Length" /> -->
+        </div> -->
       </QCardSection>
       <QCardActions align="right" class="modal-controls">
         <QBtn v-close-popup outline label="Cancel" color="black" no-caps />
@@ -140,7 +95,8 @@ async function onSaveCustomer() {
 </template>
 
 <style lang="scss" scoped>
-@import "../scss/breakpoints";
+@import "@/styles/scss/breakpoints";
+
 .modal-content {
   width: 100%;
 

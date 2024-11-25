@@ -95,7 +95,7 @@ export const useCustomerStore = defineStore("customers", {
     },
 
     async updateCustomer(customer: Customer) {
-      if (!customer) return;
+      if (!customer.id) return;
 
       try {
         const { error } = await supabase
