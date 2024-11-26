@@ -46,7 +46,6 @@ onMounted(async () => {
     <AppButton @click="onAddCustomerClick">
       <AppIcon :name="ICON_NAMES.Plus" /> Add Customer
     </AppButton>
-
     <QTable
       :rows="customerStore.customers"
       class="customer-table mt-sm"

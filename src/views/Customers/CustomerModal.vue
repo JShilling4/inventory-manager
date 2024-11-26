@@ -3,8 +3,6 @@ import { computed } from "vue";
 import { useCustomerStore } from "@/stores";
 import { type Customer } from "@/types";
 
-// const {} = defineProps<{}>();
-
 const customerStore = useCustomerStore();
 
 const customer = defineModel<Customer>("customer", { required: true });
@@ -59,26 +57,10 @@ async function onSaveCustomer() {
             class="col ml-xs"
           />
         </div>
-        <QInput v-model="customer.company" label="Company" />
-
-        <!-- <QSelect
-          v-model="song.status"
-          :options="SONG_STATUSES"
-          label="Status"
-          behavior="menu"
-        /> -->
-        <!-- <div class="row q-mt-md items-center">
-          <span class="radio-label q-field__label q-mr-sm">Highlighted?</span>
-          <QOptionGroup
-            v-model="song.is_highlighted"
-            :options="[
-              { label: 'Yes', value: true },
-              { label: 'No', value: false },
-            ]"
-            color="primary"
-            inline
-          />
-        </div> -->
+        <div class="row">
+          <QInput v-model="customer.company" label="Company" class="col" />
+          <div class="col ml-xs"></div>
+        </div>
       </QCardSection>
       <QCardActions align="right" class="modal-controls">
         <QBtn v-close-popup outline label="Cancel" color="black" no-caps />
@@ -95,16 +77,9 @@ async function onSaveCustomer() {
 </template>
 
 <style lang="scss" scoped>
-@import "@/styles/scss/breakpoints";
-
 .modal-content {
   width: 100%;
-
-  @include md {
-    width: 500px;
-  }
 }
-
 .modal-body {
   padding: 0 1.5rem 2rem;
 }
