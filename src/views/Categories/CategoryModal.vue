@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { AppDialog } from "@/components/layout";
+import { AppButton, FormInput } from "@/components/ui";
 import { useCategoryStore } from "@/stores";
 import { type Category } from "@/types";
 
@@ -23,17 +25,17 @@ async function onSaveCategory() {
 </script>
 
 <template>
-  <QDialog v-model="showModal" persistent>
+  <AppDialog v-model="showModal" persistent>
     <QCard class="modal-content">
       <QCardSection class="modal-heading row items-center bg-black text-white">
         <h6>{{ modalAction }} Category</h6>
       </QCardSection>
       <QCardSection v-if="category" class="modal-body">
         <div class="row">
-          <QInput v-model="category.name" label="Name" class="col" />
+          <FormInput v-model="category.name" label="Name" class="col" />
         </div>
         <div class="row">
-          <QInput
+          <FormInput
             v-model="category.description"
             label="Description"
             class="col"
@@ -41,8 +43,8 @@ async function onSaveCategory() {
         </div>
       </QCardSection>
       <QCardActions align="right" class="modal-controls">
-        <QBtn v-close-popup outline label="Cancel" color="black" no-caps />
-        <QBtn
+        <AppButton v-close-popup outline label="Cancel" color="black" no-caps />
+        <AppButton
           v-close-popup
           label="Save"
           color="green-10"
@@ -51,7 +53,7 @@ async function onSaveCategory() {
         />
       </QCardActions>
     </QCard>
-  </QDialog>
+  </AppDialog>
 </template>
 
 <style lang="scss" scoped>

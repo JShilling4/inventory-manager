@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { QTableProps } from "quasar";
 import { CategoryModal } from "@/views";
 import { PageHeading, PageContentContainer } from "@/components/layout";
 import { AppButton, AppIcon } from "@/components/ui";
@@ -7,7 +8,6 @@ import { useCategoryStore } from "@/stores";
 import clone from "lodash/clone";
 import { ICON_NAMES } from "@/constants";
 import { type Category, NewCategory } from "@/types";
-import { QTableProps } from "quasar";
 
 const categoryStore = useCategoryStore();
 
@@ -87,7 +87,7 @@ onMounted(async () => {
 
       <template #body-cell-delete="props">
         <QTd :props="props" auto-width>
-          <QBtn
+          <AppButton
             :icon="ICON_NAMES.Delete"
             color="red-7"
             size="sm"

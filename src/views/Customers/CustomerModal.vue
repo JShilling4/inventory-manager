@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { AppDialog } from "@/components/layout";
+import { AppButton, FormInput } from "@/components/ui";
 import { useCustomerStore } from "@/stores";
 import { type Customer } from "@/types";
 
@@ -23,48 +25,48 @@ async function onSaveCustomer() {
 </script>
 
 <template>
-  <QDialog v-model="showModal" persistent>
+  <AppDialog v-model="showModal" persistent>
     <QCard class="modal-content">
       <QCardSection class="modal-heading row items-center bg-black text-white">
         <h6>{{ modalAction }} Customer</h6>
       </QCardSection>
       <QCardSection v-if="customer" class="modal-body">
         <div class="row">
-          <QInput
+          <FormInput
             v-model="customer.first_name"
             label="First Name"
             class="col"
           />
-          <QInput
+          <FormInput
             v-model="customer.last_name"
             label="Last Name"
             class="col ml-xs"
           />
         </div>
         <div class="row">
-          <QInput v-model="customer.phone" label="Phone" class="col" />
-          <QInput v-model="customer.email" label="Email" class="col ml-xs" />
+          <FormInput v-model="customer.phone" label="Phone" class="col" />
+          <FormInput v-model="customer.email" label="Email" class="col ml-xs" />
         </div>
         <div class="row">
-          <QInput v-model="customer.address" label="Address" class="col" />
-          <QInput v-model="customer.city" label="City" class="col ml-xs" />
+          <FormInput v-model="customer.address" label="Address" class="col" />
+          <FormInput v-model="customer.city" label="City" class="col ml-xs" />
         </div>
         <div class="row">
-          <QInput v-model="customer.state" label="State" class="col" />
-          <QInput
+          <FormInput v-model="customer.state" label="State" class="col" />
+          <FormInput
             v-model="customer.zipcode"
             label="Zipcode"
             class="col ml-xs"
           />
         </div>
         <div class="row">
-          <QInput v-model="customer.company" label="Company" class="col" />
+          <FormInput v-model="customer.company" label="Company" class="col" />
           <div class="col ml-xs"></div>
         </div>
       </QCardSection>
       <QCardActions align="right" class="modal-controls">
-        <QBtn v-close-popup outline label="Cancel" color="black" no-caps />
-        <QBtn
+        <AppButton v-close-popup outline label="Cancel" color="black" no-caps />
+        <AppButton
           v-close-popup
           label="Save"
           color="green-10"
@@ -73,7 +75,7 @@ async function onSaveCustomer() {
         />
       </QCardActions>
     </QCard>
-  </QDialog>
+  </AppDialog>
 </template>
 
 <style lang="scss" scoped>
