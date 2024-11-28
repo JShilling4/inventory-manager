@@ -10,6 +10,7 @@ export const ICON_NAMES = {
   Plus: "fas fa-plus",
   Route: "",
   Settings: "fas fa-cog",
+  Delete: "fas fa-trash-can",
 } as const;
 
 type IconNameKey = keyof typeof ICON_NAMES;
