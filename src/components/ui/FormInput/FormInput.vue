@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const modelValue = defineModel<string | null>("modelValue", { required: true });
+</script>
 
 <template>
-  <input type="text" />
+  <QInput v-model="modelValue" />
 </template>
 
 <style lang="scss" scoped></style>
