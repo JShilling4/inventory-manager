@@ -1,5 +1,5 @@
 <template>
-  <QBtn class="btn">
+  <QBtn class="btn" no-caps>
     <slot></slot>
   </QBtn>
 </template>

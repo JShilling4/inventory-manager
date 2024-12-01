@@ -1,18 +1,91 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { PageHeading, PageContentContainer } from "@/components/layout";
-import { AppButton, AppIcon } from "@/components/ui";
+import { AppButton, AppTable } from "@/components/ui";
 import { CustomerModal } from "@/views";
+import { useCustomerStore } from "@/stores";
 import clone from "lodash/clone";
 import { ICON_NAMES } from "@/constants";
 import { type Customer, NewCustomer } from "@/types";
-import { useCustomerStore } from "@/stores";
+import { type QTableProps } from "quasar";
 
 const customerStore = useCustomerStore();
 
 const showModal = ref(false);
 const modalAction = ref<"Add" | "Edit">("Add");
 const localCustomer = ref<Customer>(NewCustomer());
+const customerTableColumns: QTableProps["columns"] = [
+  {
+    name: "company",
+    required: true,
+    label: "Company",
+    align: "left",
+    field: (row: Customer) => row.company,
+    sortable: true,
+  },
+  {
+    name: "first_name",
+    required: true,
+    label: "First Name",
+    align: "left",
+    field: (row: Customer) => row.first_name,
+    sortable: true,
+  },
+  {
+    name: "last_name",
+    required: false,
+    label: "Last Name",
+    align: "left",
+    field: (row: Customer) => row.last_name,
+    sortable: false,
+  },
+  {
+    name: "email",
+    required: true,
+    label: "Email",
+    align: "left",
+    field: (row: Customer) => row.email,
+    sortable: false,
+  },
+  {
+    name: "phone",
+    required: true,
+    label: "Phone",
+    align: "center",
+    field: (row: Customer) => row.phone,
+    sortable: true,
+  },
+  {
+    name: "address",
+    required: true,
+    label: "Address",
+    align: "left",
+    field: (row: Customer) => row.address,
+    sortable: true,
+  },
+  {
+    name: "city",
+    required: true,
+    label: "City",
+    align: "left",
+    field: (row: Customer) => row.city,
+    sortable: true,
+  },
+  {
+    name: "state",
+    required: true,
+    label: "State",
+    align: "left",
+    field: (row: Customer) => row.state,
+    sortable: true,
+  },
+  {
+    name: "delete",
+    label: "",
+    field: "",
+    sortable: false,
+  },
+];
 
 function onAddCustomerClick() {
   modalAction.value = "Add";
@@ -27,9 +100,10 @@ function onEditCustomerClick(_event: Event, row: Customer) {
   showModal.value = true;
 }
 
-// function onDeleteCustomerClick(id: number) {
-//   customerStore.deleteSong(id);
-// }
+function onDeleteCustomerClick(row: Customer) {
+  if (!row.id) return;
+  customerStore.deleteCustomer(row.id);
+}
 
 function onHideModal() {
   localCustomer.value = NewCustomer();
@@ -43,19 +117,22 @@ onMounted(async () => {
 <template>
   <PageHeading>Customers</PageHeading>
   <PageContentContainer>
-    <AppButton @click="onAddCustomerClick">
-      <AppIcon :name="ICON_NAMES.Plus" /> Add Customer
+    <AppButton
+      :icon="ICON_NAMES.Plus"
+      label="Add"
+      color="primary"
+      outline
+      @click="onAddCustomerClick"
+    >
     </AppButton>
-    <QTable
+    <AppTable
       :rows="customerStore.customers"
+      :columns="customerTableColumns"
       class="customer-table mt-sm"
       :loading="customerStore.loading"
       @row-click="onEditCustomerClick"
-    >
-      <template #loading>
-        <QInnerLoading showing color="primary" />
-      </template>
-    </QTable>
+      @delete="onDeleteCustomerClick"
+    />
   </PageContentContainer>
   <CustomerModal
     v-model:show-modal="showModal"

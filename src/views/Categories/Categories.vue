@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import { QTableProps } from "quasar";
 import { CategoryModal } from "@/views";
 import { PageHeading, PageContentContainer } from "@/components/layout";
-import { AppButton } from "@/components/ui";
+import { AppButton, AppTable } from "@/components/ui";
 import { useCategoryStore } from "@/stores";
 import clone from "lodash/clone";
 import { ICON_NAMES } from "@/constants";
@@ -74,29 +74,14 @@ onMounted(async () => {
       color="primary"
       @click="onAddCategoryClick"
     />
-    <QTable
+    <AppTable
       :rows="categoryStore.categories"
       :columns="categoryTableColumns"
       class="customer-table mt-sm"
       :loading="categoryStore.loading"
       @row-click="onEditCategoryClick"
-    >
-      <template #loading>
-        <QInnerLoading showing color="primary" />
-      </template>
-
-      <template #body-cell-delete="props">
-        <QTd :props="props" auto-width>
-          <AppButton
-            :icon="ICON_NAMES.Delete"
-            color="red-7"
-            size="sm"
-            round
-            @click.stop="onDeleteCategoryClick(props.row)"
-          />
-        </QTd>
-      </template>
-    </QTable>
+      @delete="onDeleteCategoryClick"
+    />
   </PageContentContainer>
   <CategoryModal
     v-model:show-modal="showModal"
