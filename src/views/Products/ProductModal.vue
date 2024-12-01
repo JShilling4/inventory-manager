@@ -47,6 +47,14 @@ async function onSaveProduct() {
     <template v-if="product" #body>
       <div class="row">
         <FormInput v-model="product.name" label="Name" class="col" />
+        <FormSelect
+          v-model="product.category_id"
+          :options="categoryOptions"
+          label="Category"
+          emit-value
+          map-options
+          class="col ml-sm"
+        />
       </div>
       <div class="row">
         <FormInput
@@ -55,13 +63,7 @@ async function onSaveProduct() {
           class="col"
         />
       </div>
-      <FormSelect
-        v-model="product.category_id"
-        :options="categoryOptions"
-        label="Category"
-        emit-value
-        map-options
-      />
+
       <div class="row">
         <FormInput v-model="product.price" label="Price" class="col" />
         <FormInput
