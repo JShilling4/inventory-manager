@@ -14,7 +14,7 @@ defineEmits<{
 </script>
 
 <template>
-  <QTable :rows :columns class="customer-table mt-sm">
+  <QTable :rows :columns class="app-table mt-sm">
     <template #loading>
       <QInnerLoading showing color="primary" />
     </template>
@@ -24,8 +24,7 @@ defineEmits<{
         <AppButton
           :icon="ICON_NAMES.Delete"
           color="red-7"
-          size="sm"
-          round
+          fab-mini
           @click.stop="$emit('delete', props.row)"
         />
       </QTd>
