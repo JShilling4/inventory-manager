@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import { QTableProps } from "quasar";
 import { CategoryModal } from "@/views";
 import { PageHeading, PageContentContainer } from "@/components/layout";
-import { AppButton, AppIcon } from "@/components/ui";
+import { AppButton } from "@/components/ui";
 import { useCategoryStore } from "@/stores";
 import clone from "lodash/clone";
 import { ICON_NAMES } from "@/constants";
@@ -13,8 +13,11 @@ const categoryStore = useCategoryStore();
 
 const showModal = ref(false);
 const modalAction = ref<"Add" | "Edit">("Add");
-const localCategory = ref<Category>(NewCategory());
+function onHideModal() {
+  localCategory.value = NewCategory();
+}
 
+const localCategory = ref<Category>(NewCategory());
 const categoryTableColumns: QTableProps["columns"] = [
   {
     name: "name",
@@ -40,12 +43,10 @@ const categoryTableColumns: QTableProps["columns"] = [
     sortable: false,
   },
 ];
-
 function onAddCategoryClick() {
   modalAction.value = "Add";
   showModal.value = true;
 }
-
 function onEditCategoryClick(_event: Event, row: Category) {
   if (!row.id) return;
   localCategory.value =
@@ -53,14 +54,9 @@ function onEditCategoryClick(_event: Event, row: Category) {
   modalAction.value = "Edit";
   showModal.value = true;
 }
-
 function onDeleteCategoryClick(row: Category) {
   if (!row.id) return;
   categoryStore.deleteCategory(row.id);
-}
-
-function onHideModal() {
-  localCategory.value = NewCategory();
 }
 
 onMounted(async () => {
@@ -71,9 +67,13 @@ onMounted(async () => {
 <template>
   <PageHeading>Categories</PageHeading>
   <PageContentContainer>
-    <AppButton @click="onAddCategoryClick">
-      <AppIcon :name="ICON_NAMES.Plus" /> Add Category
-    </AppButton>
+    <AppButton
+      :icon="ICON_NAMES.Plus"
+      label="Add"
+      outline
+      color="primary"
+      @click="onAddCategoryClick"
+    />
     <QTable
       :rows="categoryStore.categories"
       :columns="categoryTableColumns"
@@ -91,7 +91,7 @@ onMounted(async () => {
             :icon="ICON_NAMES.Delete"
             color="red-7"
             size="sm"
-            rounded
+            round
             @click.stop="onDeleteCategoryClick(props.row)"
           />
         </QTd>
