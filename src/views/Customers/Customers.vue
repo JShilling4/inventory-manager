@@ -12,7 +12,10 @@ import { type QTableProps } from "quasar";
 const customerStore = useCustomerStore();
 
 const showModal = ref(false);
-const modalAction = ref<"Add" | "Edit">("Add");
+function onHideModal() {
+  localCustomer.value = NewCustomer();
+}
+
 const localCustomer = ref<Customer>(NewCustomer());
 const customerTableColumns: QTableProps["columns"] = [
   {
@@ -86,27 +89,18 @@ const customerTableColumns: QTableProps["columns"] = [
     sortable: false,
   },
 ];
-
 function onAddCustomerClick() {
-  modalAction.value = "Add";
   showModal.value = true;
 }
-
 function onEditCustomerClick(_event: Event, row: Customer) {
   if (!row.id) return;
   localCustomer.value =
     clone(customerStore.getCustomerById(row.id)) ?? NewCustomer();
-  modalAction.value = "Edit";
   showModal.value = true;
 }
-
 function onDeleteCustomerClick(row: Customer) {
   if (!row.id) return;
   customerStore.deleteCustomer(row.id);
-}
-
-function onHideModal() {
-  localCustomer.value = NewCustomer();
 }
 
 onMounted(async () => {
@@ -137,7 +131,6 @@ onMounted(async () => {
   <CustomerModal
     v-model:show-modal="showModal"
     v-model:customer="localCustomer"
-    :action="modalAction"
     @hide="onHideModal"
   />
 </template>

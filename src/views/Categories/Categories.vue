@@ -12,7 +12,6 @@ import { type Category, NewCategory } from "@/types";
 const categoryStore = useCategoryStore();
 
 const showModal = ref(false);
-const modalAction = ref<"Add" | "Edit">("Add");
 function onHideModal() {
   localCategory.value = NewCategory();
 }
@@ -44,14 +43,12 @@ const categoryTableColumns: QTableProps["columns"] = [
   },
 ];
 function onAddCategoryClick() {
-  modalAction.value = "Add";
   showModal.value = true;
 }
 function onEditCategoryClick(_event: Event, row: Category) {
   if (!row.id) return;
   localCategory.value =
     clone(categoryStore.getCategoryById(row.id)) ?? NewCategory();
-  modalAction.value = "Edit";
   showModal.value = true;
 }
 function onDeleteCategoryClick(row: Category) {
@@ -86,7 +83,6 @@ onMounted(async () => {
   <CategoryModal
     v-model:show-modal="showModal"
     v-model:category="localCategory"
-    :action="modalAction"
     @hide="onHideModal"
   />
 </template>

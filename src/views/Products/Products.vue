@@ -13,7 +13,6 @@ const categoryStore = useCategoryStore();
 const productStore = useProductStore();
 
 const showModal = ref(false);
-const modalAction = ref<"Add" | "Edit">("Add");
 function onHideModal() {
   localProduct.value = NewProduct();
 }
@@ -77,14 +76,12 @@ const productTableColumns: QTableProps["columns"] = [
   },
 ];
 function onAddProductClick() {
-  modalAction.value = "Add";
   showModal.value = true;
 }
 function onEditProductClick(_event: Event, row: Product) {
   if (!row.id) return;
   localProduct.value =
     clone(productStore.getProductById(row.id)) ?? NewProduct();
-  modalAction.value = "Edit";
   showModal.value = true;
 }
 function onDeleteProductClick(row: Product) {
@@ -120,7 +117,6 @@ onMounted(async () => {
   <ProductModal
     v-model:show-modal="showModal"
     v-model:product="localProduct"
-    :action="modalAction"
     @hide="onHideModal"
   />
 </template>

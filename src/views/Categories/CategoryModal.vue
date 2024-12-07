@@ -23,6 +23,7 @@ async function onSaveCategory() {
   } else {
     await categoryStore.createCategory(category.value);
   }
+  showModal.value = false;
 }
 </script>
 

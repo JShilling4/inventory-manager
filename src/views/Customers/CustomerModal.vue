@@ -23,6 +23,7 @@ async function onSaveCustomer() {
   } else {
     await customerStore.createCustomer(customer.value);
   }
+  showModal.value = false;
 }
 </script>
 
